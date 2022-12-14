@@ -1,0 +1,72 @@
+{% extends 'main/layaot.html' %}
+{% load static %}
+{% load filters %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'main/subject_account.css' %}">
+{% endblock %}
+{% block title %}
+    Главная страница
+{% endblock %}
+{% block content %}
+    <section class="subject-notation">
+        <div class="left-menu">
+            <div class="left-navigation">
+                <div class="logo-left-nav"></div>
+                <div class="left-nav-main">
+                    <div class="item-nav">
+                        <a class="link-left-nav">
+                            <span>Календарь занятий</span>
+                        </a>
+                    </div>
+                    <div class="item-nav">
+                        <a class="link-left-nav">
+                            <span>Видео уроки</span>
+                        </a>
+                    </div>
+                    <div class="item-nav">
+                        <a class="link-left-nav">
+                            <span>Домашние задания</span>
+                        </a>
+                    </div>
+                    <div class="item-nav">
+                        <a class="link-left-nav">
+                            <span>Каталог Заданий</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="section-content">
+            <section class="main-section">
+                <div class="topic">
+                    <div class="name-subject">
+                        Предмет: математика
+                    </div>
+                    <div class="video">Видеоматериалы</div>
+                </div>
+                <div class="topic">
+                    <div class="catalog-math">
+                        <p style="font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 24px;
+    color: #FFFFFF99">Бесплатный каталог задач по математике</p>
+                        <div style="padding-top: 10px;
+    width: 66%;
+    max-width: 636px;" class="about-cat">
+                    <p>Выбирай тематику и сложность заданий, оттачивай мастерство на методически подобраных задачах. Изучай подробные решения в ответах.</p>
+                            <a href="#" style="color: #0399E9;
+    font-weight: 700;">Начать решать задачи</a>
+                        </div>
+                        <img style="position: absolute;
+    right: 280px;
+    bottom: 0;" src="https://2.shkolkovo.online/images/catalog-img.png">
+                    </div>
+                </div>
+                <div class="topic"></div>
+            </section>
+        </div>
+    </section>
+
+{% endblock %}

@@ -1,0 +1,71 @@
+{% extends 'main/layaot.html' %}
+{% block title %}
+    Главная страница
+{% endblock %}
+{% block content %}
+    <div class="content">
+        Тут будут новости!
+    </div>
+    <div class="select-item">
+        <div class="items">
+            {% for el in subj %}
+                {% if el.title == 'Математика'%}
+                <div class="name-items" id="active">{{ el.title }}</div>
+                {% endif %}
+                {% if el.title != 'Математика'%}
+                <div class="name-items">{{ el.title }}</div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+    <div class="item-info">
+        <div class="item-info-inside">
+            {% for el in kurs %}
+                {% if  el.subject.title == 'Математика' %}
+                <div class="about-item">
+                    <div class="some-info">
+                        <div class="main-info">
+                            <div class="delimer">
+                                <div class="name-subj">
+                                <span class="name-subj-of-curse">
+                                    {{ el.subject }}
+                                </span>
+                                </div>
+                                <div class="name">{{ el.title }}</div>
+                            </div>
+                            <hr style="background: #282828">
+                            <div class="delimer">
+                                <div class="information">
+                                    {{ el.about }}
+                                </div>
+                                <div class="bonus">
+                                    <ul>
+                                        <li>4 Онлайн занятий в неделю</li>
+                                        <li>Записи всех занятий</li>
+                                        <li>Еженедельное тематическое ДЗ по первой и второй части</li>
+                                        <li>4 пробника с экспертной проверкой за месяц</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="bottom-fixed">
+                            <p>
+                            <div class="price">
+                                <span class="month">
+                                    Месяц
+                                </span>
+                                <span class="price-curse">{{ el.price }} рублей</span>
+                            </div>
+                            </p>
+                            <div class="button">
+                                <div class="buy">Купить подписку</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends 'main/layaot.html' %}
+{% load static %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'registration/style.css' %}">
+{% endblock %}
+{% block title %}
+    Главная страница
+{% endblock %}
+{% block content %}
+<main>
+    <div class="content">
+        <form method="post" action="{% url 'login' %}">
+            {% csrf_token %}
+            <div class="form">
+                <h1>Логин</h1>
+                <label for="log">Логин</label>
+                <input type="text" id="id_username" name="username">
+                <br>
+                <label for="pas">Пароль</label>
+                <input type="password" id="id_password" name="password" autocomplete="current-password">
+                <br>
+                <button class="go">Войти</button>
+            </div>
+        </form>
+    </div>
+</main>
+</div>
+{% endblock %}

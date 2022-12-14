@@ -1,0 +1,45 @@
+{% extends 'main/layaot.html' %}
+{% load static %}
+{% load filters %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'main/profile.css' %}">
+{% endblock %}
+{% block title %}
+    Главная страница
+{% endblock %}
+{% block content %}
+    <section class="profile">
+        <h1>
+            Личный кабинет
+        </h1>
+        <div class="profile-information">
+            <div class="item-information"><a class="btn-profile"> Домашнее задание</a></div>
+            <div class="item-information"><a class="btn-profile"> Каталог задач</a></div>
+            <div class="item-information"><a class="btn-profile"> Курсы 2023</a></div>
+            <div class="item-information"><a class="btn-profile"> Рулетка </a></div>
+        </div>
+        <div class="subject-user">
+            <div class="title">
+                Мои предметы
+            </div>
+            <div class="subject-list">
+                {% for foo in profile %}
+                    {% for subj in foo.curses.all|unique %}
+                        <div class="profile-subject-name">
+                            <a href="{% url 'subject_account' %}">
+                                <div class="subj-url">
+                                    <div class="subj-url-content">
+                                        {{ subj }}
+                                    </div>
+                                    <div class="logo-subj">
+                                        <img src="https://2.shkolkovo.online/images/subjects/1-white.svg">
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+{% endblock %}
