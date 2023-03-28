@@ -17,7 +17,17 @@ class Curse(models.Model):
     subject = models.ForeignKey(subjects,on_delete=models.CASCADE)
     title = models.CharField('Название', max_length=70)
     about = models.TextField('О курсе')
+    information = models.TextField('Информация о курсе ')
     price = models.IntegerField('Цена')
+
+    def __str__(self):
+        return self.title
+
+
+class Lesson(models.Model):
+    curse = models.ForeignKey(Curse, on_delete=models.CASCADE)
+    title = models.CharField('Название', max_length=70)
+    dateTime = models.DateTimeField('Дата и время занятия')
 
     def __str__(self):
         return self.title

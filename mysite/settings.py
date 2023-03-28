@@ -9,7 +9,10 @@ https://docs.mysite.com/en/4.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.mysite.com/en/4.1/ref/settings/
 """
-
+import django
+from django.utils.encoding import force_str
+from corsheaders.defaults import default_headers
+django.utils.encoding.force_text = force_str
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -25,7 +28,7 @@ SECRET_KEY = 'django-insecure-uhvkjbty$&z2v^j5)g96dg-%bq0yy_9!snp46b*=ge32c&hpc+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['df1inbc2.beget.tech', '127.0.0.1']
+ALLOWED_HOSTS = ['df1inbc2.beget.tech', '127.0.0.1', 'localhost:8000']
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
@@ -39,12 +42,22 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'apitest',
+    'corsheaders',
+    'rest_framework',
+    'rest_framework.authtoken',
+    'djoser',
+    'oauth2_provider',
+    'social_django',
+    'rest_framework_social_oauth2',
     'subjects',
     'main',
-    'authentication'
+    'authentication',
 ]
 
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
+    "django.middleware.common.CommonMiddleware",
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -54,6 +67,36 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOWED_ORIGINS = [
+    "https://example.com",
+    "http://127.0.0.1:8000",
+    "http://127.0.0.1:3000"
+]
+CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_HEADERS = default_headers + (
+    'Access-Control-Allow-Headers',
+    'Access-Control-Allow-Credentials',
+    'Access-Control-Allow-Origin',
+)
+CORS_ORIGIN_WHITELIST = (
+    'http://localhost:3000',
+    'http://127.0.0.1:3000',
+)
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny'
+    ],
+
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'oauth2_provider.contrib.rest_framework.OAuth2Authentication',
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework_social_oauth2.authentication.SocialAuthentication'
+    ),
+
+}
 ROOT_URLCONF = 'mysite.urls'
 
 TEMPLATES = [
@@ -104,6 +147,15 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+AUTHENTICATION_BACKENDS = [
+    'social_core.backends.vk.VKOAuth2',
+    'rest_framework_social_oauth2.backends.DjangoOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+]
+
+
+SOCIAL_AUTH_VK_OAUTH2_KEY = '51587230'
+SOCIAL_AUTH_VK_OAUTH2_SECRET = 'Voo3Kq3PI3xKoeDGp8DV'
 
 
 # Internationalization

@@ -14,13 +14,22 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, re_path
 
 from django.conf import settings
 from django.conf.urls.static import static
+
+from apitest.views import CurseApi, SubjectApi, LessonApi
+
 urlpatterns = [
+    path('api/v1/curses/', CurseApi.as_view()),
+    path('api/v1/subject/', SubjectApi.as_view()),
+    path('api/v1/lessons/', LessonApi.as_view()),
     path('admin/', admin.site.urls),
     path('', include('main.urls')),
-    path('auth/', include('authentication.urls')),
+    path('api/v1/drf-auth', include('rest_framework.urls')),
+    re_path(r'^auth/', include('djoser.urls')),# auth в вконтакте - джосер
+    re_path(r'^auth/', include('djoser.urls.authtoken')),
+    re_path(r'^auth/', include('rest_framework_social_oauth2.urls')),
     path('subject/', include('subjects.urls'))
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
