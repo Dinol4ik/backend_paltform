@@ -19,12 +19,13 @@ from django.urls import path, include, re_path
 from django.conf import settings
 from django.conf.urls.static import static
 
-from apitest.views import CurseApi, SubjectApi, LessonApi
+from apitest.views import CurseApi, SubjectApi, LessonApi, UserApi
 
 urlpatterns = [
     path('api/v1/curses/', CurseApi.as_view()),
     path('api/v1/subject/', SubjectApi.as_view()),
     path('api/v1/lessons/', LessonApi.as_view()),
+    path('api/v1/users/<int:pk>/', UserApi.as_view()),
     path('admin/', admin.site.urls),
     path('', include('main.urls')),
     path('api/v1/drf-auth', include('rest_framework.urls')),

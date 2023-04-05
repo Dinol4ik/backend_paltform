@@ -38,4 +38,4 @@ def token(request):
         "backend": "vk-oauth2"})
     json_token_bd = json.loads((data.text))['access_token']
     content = {'data': json_token_bd}
-    return redirect('http://127.0.0.1:3000/account?token='+ json_token_bd)
+    return redirect('http://127.0.0.1:3000/login?token='+ json_token_bd)
