@@ -14,7 +14,7 @@ class subjects(models.Model):
 
 
 class Curse(models.Model):
-    subject = models.ForeignKey(subjects,on_delete=models.CASCADE)
+    subject = models.ForeignKey(subjects, related_name='curses', on_delete=models.CASCADE)
     title = models.CharField('Название', max_length=70)
     about = models.TextField('О курсе')
     information = models.TextField('Информация о курсе ')
