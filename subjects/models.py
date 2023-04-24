@@ -31,3 +31,28 @@ class Lesson(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Section(models.Model):
+    title = models.CharField('Номер задания', max_length=90)
+
+    def __str__(self):
+        return self.title
+
+
+class ThemeTask(models.Model):
+    section = models.ForeignKey(Section, related_name='section', on_delete=models.CASCADE)
+    title = models.CharField('Тема заданий', max_length=90)
+
+    def __str__(self):
+        return self.title
+
+
+class Task(models.Model):
+    themeTask = models.ForeignKey(ThemeTask, related_name='theme', on_delete=models.CASCADE)
+    title = models.CharField('Название', max_length=70)
+    imgTask = models.ImageField('Фото Задание', upload_to='img/api/v1/task', blank=True)
+    answer = models.FloatField('Ответ')
+
+    def __str__(self):
+        return self.title

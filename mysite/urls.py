@@ -20,22 +20,29 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 from apitest.views import CurseApi, SubjectApi, LessonApi, UserApi, ProfileApi, ProfileCurseApi, AddCurseInProfile, \
-    subjectProfileApi
+    subjectProfileApi, SectionTask, ThemeViewTask, Task, OnlyOneThemeTask
 
 urlpatterns = [
-    path('api/v1/curses/', CurseApi.as_view()),
-    path('api/v1/subject/', SubjectApi.as_view()),
-    path('api/v1/lessons/', LessonApi.as_view()),
-    path('api/v1/zapiski/', ProfileCurseApi.as_view()),
-    path('api/v1/users/<int:pk>/', UserApi.as_view()),
-    path('api/v1/profile/<int:pk>/', ProfileApi.as_view()),
-    path('api/v1/subject/<int:pk>/', subjectProfileApi.as_view()),
-    path('api/v1/addcurse/', AddCurseInProfile.as_view()),
-    path('admin/', admin.site.urls),
-    path('', include('main.urls')),
-    path('api/v1/drf-auth', include('rest_framework.urls')),
-    re_path(r'^auth/', include('djoser.urls')),# auth в вконтакте - джосер
-    re_path(r'^auth/', include('djoser.urls.authtoken')),
-    re_path(r'^auth/', include('rest_framework_social_oauth2.urls')),
-    path('subject/', include('subjects.urls'))
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+                  path('api/v1/curses/', CurseApi.as_view()),
+                  path('api/v1/subject/', SubjectApi.as_view()),
+                  path('api/v1/lessons/', LessonApi.as_view()),
+                  path('api/v1/zapiski/', ProfileCurseApi.as_view()),
+                  path('api/v1/section/', SectionTask.as_view()),
+                  path('api/v1/themeTask/', ThemeViewTask.as_view()),
+                  path('api/v1/themeTask/<int:pk>', OnlyOneThemeTask.as_view()),
+                  path('api/v1/task/', Task.as_view()),
+                  path('api/v1/users/<int:pk>/', UserApi.as_view()),
+                  path('api/v1/profile/<int:pk>/', ProfileApi.as_view()),
+                  path('api/v1/subject/<int:pk>/', subjectProfileApi.as_view()),
+                  path('api/v1/addcurse/', AddCurseInProfile.as_view()),
+                  path('admin/', admin.site.urls),
+                  path('', include('main.urls')),
+                  path('api/v1/drf-auth', include('rest_framework.urls')),
+                  re_path(r'^auth/', include('djoser.urls')),  # auth в вконтакте - джосер
+                  re_path(r'^auth/', include('djoser.urls.authtoken')),
+                  re_path(r'^auth/', include('rest_framework_social_oauth2.urls')),
+                  path('subject/', include('subjects.urls'))
+              ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL,
+                          document_root=settings.MEDIA_ROOT)

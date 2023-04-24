@@ -6,14 +6,15 @@ from rest_framework.permissions import IsAuthenticated
 
 from main.models import Profile, Enrollment
 from .serializers import CurseSerializer, SubjectSerializer, LessonSerializer, UserSerializer, ProfileSerializer, \
-    ProfileCurseSerializer, AddProfileCurse, SubjectInProfileSerializer
-from subjects.models import Curse, subjects, Lesson
+    ProfileCurseSerializer, AddProfileCurse, SubjectInProfileSerializer, SectionSerializer, TaskSerializer, \
+    ThemTaskSerializer
+from subjects.models import Curse, subjects, Lesson, Section, Task, ThemeTask
 
 
 class CurseApi(generics.ListAPIView):
     queryset = Curse.objects.all()
     serializer_class = CurseSerializer
-    permission_classes = (IsAuthenticated,) ##- ограничения на получение данных
+    # permission_classes = (IsAuthenticated,) ##- ограничения на получение данных
 
 
 class SubjectApi(generics.ListAPIView):
@@ -22,8 +23,9 @@ class SubjectApi(generics.ListAPIView):
 
 
 class ProfileApi(generics.RetrieveAPIView):
-        queryset = Profile.objects.all()
-        serializer_class = ProfileSerializer
+    queryset = Profile.objects.all()
+    serializer_class = ProfileSerializer
+
 
 class subjectProfileApi(generics.RetrieveAPIView):
     queryset = subjects.objects.all()
@@ -49,3 +51,22 @@ class AddCurseInProfile(generics.CreateAPIView):
     queryset = Enrollment.objects.all()
     serializer_class = AddProfileCurse
 
+
+class SectionTask(generics.ListAPIView):
+    queryset = Section.objects.all()
+    serializer_class = SectionSerializer
+
+
+class ThemeViewTask(generics.ListAPIView):
+    queryset = ThemeTask.objects.all()
+    serializer_class = ThemTaskSerializer
+
+
+class OnlyOneThemeTask(generics.RetrieveAPIView):
+    queryset = ThemeTask.objects.all()
+    serializer_class = ThemTaskSerializer
+
+
+class Task(generics.ListAPIView):
+    queryset = Task.objects.all()
+    serializer_class = TaskSerializer
