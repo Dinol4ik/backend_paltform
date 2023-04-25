@@ -3,10 +3,11 @@ from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render, redirect
 import json
 
+from django.views.decorators.csrf import csrf_exempt
 from requests import Response
 
-from subjects.models import subjects, Curse
-from .models import Profile
+from subjects.models import subjects, Curse, Task
+from .models import Profile, TaskProfile
 
 
 def index(request):
@@ -44,7 +45,19 @@ def token(request):
     return redirect('http://127.0.0.1:3000/login?token=' + json_token_bd)
 
 
+@csrf_exempt
 def analysAnswer(request):
     d = json.loads(request.body)
-    result = {"answer": "true"}
-    return HttpResponse(json.dumps(result), content_type="application/json")
+    result = {"answer": "true", "task": d['idTask']}
+    result2 = {"answer": "false"}
+    model = Task.objects.get(id=d['idTask'])
+    if (model.answer == float(d['answer'])):
+        create = TaskProfile.objects.create(
+            solveTask=True,
+            task_id=int(d['idTask']),
+            profile_id=int(d['idProfile'])
+        )
+        create.save()
+        return HttpResponse(json.dumps(result), content_type="application/json")
+    else:
+        return HttpResponse(json.dumps(result2), content_type="application/json")

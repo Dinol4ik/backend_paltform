@@ -3,11 +3,13 @@ from django.contrib.auth.models import User
 from django.shortcuts import render
 from rest_framework import generics, viewsets
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
+from rest_framework.views import APIView
 
-from main.models import Profile, Enrollment
+from main.models import Profile, Enrollment, TaskProfile
 from .serializers import CurseSerializer, SubjectSerializer, LessonSerializer, UserSerializer, ProfileSerializer, \
     ProfileCurseSerializer, AddProfileCurse, SubjectInProfileSerializer, SectionSerializer, TaskSerializer, \
-    ThemTaskSerializer
+    ThemTaskSerializer, SolveTaskSerializer
 from subjects.models import Curse, subjects, Lesson, Section, Task, ThemeTask
 
 
@@ -70,3 +72,9 @@ class OnlyOneThemeTask(generics.RetrieveAPIView):
 class Task(generics.ListAPIView):
     queryset = Task.objects.all()
     serializer_class = TaskSerializer
+
+
+class SolveTask(generics.ListAPIView):
+    def get(self, request, pk, **kwargs):
+        b = TaskProfile.objects.filter(profile_id=pk).values()
+        return Response({'test': list(b)})

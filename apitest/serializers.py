@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
 
-from main.models import Profile, Enrollment
+from main.models import Profile, Enrollment, TaskProfile
 from subjects.models import Curse, subjects, Lesson, Section, Task, ThemeTask
 
 
@@ -86,4 +86,10 @@ class SectionSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Section
+        fields = '__all__'
+
+
+class SolveTaskSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = TaskProfile
         fields = '__all__'

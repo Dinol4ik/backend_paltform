@@ -20,7 +20,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 from apitest.views import CurseApi, SubjectApi, LessonApi, UserApi, ProfileApi, ProfileCurseApi, AddCurseInProfile, \
-    subjectProfileApi, SectionTask, ThemeViewTask, Task, OnlyOneThemeTask
+    subjectProfileApi, SectionTask, ThemeViewTask, Task, OnlyOneThemeTask, SolveTask
 
 urlpatterns = [
                   path('api/v1/curses/', CurseApi.as_view()),
@@ -29,6 +29,7 @@ urlpatterns = [
                   path('api/v1/zapiski/', ProfileCurseApi.as_view()),
                   path('api/v1/section/', SectionTask.as_view()),
                   path('api/v1/themeTask/', ThemeViewTask.as_view()),
+                  path('api/v1/solveTaskInProfile/<int:pk>', SolveTask.as_view()),
                   path('api/v1/themeTask/<int:pk>', OnlyOneThemeTask.as_view()),
                   path('api/v1/task/', Task.as_view()),
                   path('api/v1/users/<int:pk>/', UserApi.as_view()),

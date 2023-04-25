@@ -79,7 +79,6 @@ CORS_ALLOW_HEADERS = default_headers + (
     'Access-Control-Allow-Headers',
     'Access-Control-Allow-Credentials',
     'Access-Control-Allow-Origin',
-    'x-xsrf-token',
 )
 CORS_ORIGIN_WHITELIST = (
     'http://localhost:3000',
