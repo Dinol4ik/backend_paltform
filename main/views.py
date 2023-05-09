@@ -1,3 +1,5 @@
+import numbers
+
 import requests
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render, redirect
@@ -48,16 +50,31 @@ def token(request):
 @csrf_exempt
 def analysAnswer(request):
     d = json.loads(request.body)
-    result = {"answer": "true", "task": d['idTask']}
-    result2 = {"answer": "false"}
-    model = Task.objects.get(id=d['idTask'])
-    if (model.answer == float(d['answer'])):
-        create = TaskProfile.objects.create(
-            solveTask=True,
-            task_id=int(d['idTask']),
-            profile_id=int(d['idProfile'])
-        )
-        create.save()
-        return HttpResponse(json.dumps(result), content_type="application/json")
+    if (d['answer'].replace('.', '', 1).isdigit()):
+        result = {"answer": "true", "task": d['idTask'], "color": "green", "res": "Ответ верный!", "id": d['idTask']}
+        model = Task.objects.get(id=d['idTask'])
+        if TaskProfile.objects.filter(profile_id=d['idProfile']) & TaskProfile.objects.filter(
+                task_id=d['idTask']):
+            return HttpResponse(json.dumps({"res": "Вы уже ответили правильно на это задание!", "color": "green", "id": d['idTask']}),
+                                content_type="application/json")
+        if (model.answer == float(d['answer'])):
+            create = TaskProfile.objects.create(
+                solveTask=True,
+                task_id=int(d['idTask']),
+                profile_id=int(d['idProfile'])
+            )
+            create.save()
+            return HttpResponse(json.dumps(result), content_type="application/json")
+        else:
+            return HttpResponse(json.dumps({"res": "Ответ не верный!!", "color": "red", "id": d['idTask']}),
+                                content_type="application/json")
     else:
-        return HttpResponse(json.dumps(result2), content_type="application/json")
+        return HttpResponse(json.dumps({"res": "Введите только число!", "color": "purple", "id": d['idTask']}),
+                            content_type="application/json")
+
+
+def statistics(request, pk):
+    model = TaskProfile.objects.filter(profile_id=pk).count()
+    allTask = Task.objects.all().count()
+    statistic = model / allTask * 100
+    return HttpResponse(json.dumps({"statistic": statistic}), content_type="application/json")

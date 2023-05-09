@@ -9,7 +9,7 @@ from rest_framework.views import APIView
 from main.models import Profile, Enrollment, TaskProfile
 from .serializers import CurseSerializer, SubjectSerializer, LessonSerializer, UserSerializer, ProfileSerializer, \
     ProfileCurseSerializer, AddProfileCurse, SubjectInProfileSerializer, SectionSerializer, TaskSerializer, \
-    ThemTaskSerializer, SolveTaskSerializer
+    ThemTaskSerializer, SolveTaskSerializer, CurseLessonSerializer
 from subjects.models import Curse, subjects, Lesson, Section, Task, ThemeTask
 
 
@@ -75,6 +75,15 @@ class Task(generics.ListAPIView):
 
 
 class SolveTask(generics.ListAPIView):
-    def get(self, request, pk, **kwargs):
-        b = TaskProfile.objects.filter(profile_id=pk).values()
-        return Response({'test': list(b)})
+    lookup_field = "profile_id"
+    queryset = TaskProfile.objects.filter()
+    serializer_class = SolveTaskSerializer
+    # def get(self, request, pk, **kwargs):
+    #     b = TaskProfile.objects.filter(profile_id=pk).values()
+    #     return self.retrieve(request, pk, **kwargs)
+    # #     return Response({'test': list(b)})
+
+
+class AllLessonInCourse(generics.RetrieveAPIView):
+    queryset = Curse.objects.all()
+    serializer_class = CurseLessonSerializer

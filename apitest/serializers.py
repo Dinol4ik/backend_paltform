@@ -60,7 +60,7 @@ class AddProfileCurse(serializers.ModelSerializer):
 
 
 class SubjectInProfileSerializer(serializers.ModelSerializer):
-    curses = serializers.StringRelatedField(many=True)
+    curses = CurseSerializer(many=True)
 
     class Meta:
         model = subjects
@@ -90,6 +90,15 @@ class SectionSerializer(serializers.ModelSerializer):
 
 
 class SolveTaskSerializer(serializers.ModelSerializer):
+    task = TaskSerializer()
     class Meta:
         model = TaskProfile
+        fields = '__all__'
+
+
+class CurseLessonSerializer(serializers.ModelSerializer):
+    lessons = LessonSerializer(many=True)
+
+    class Meta:
+        model = Curse
         fields = '__all__'

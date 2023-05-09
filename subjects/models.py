@@ -25,9 +25,10 @@ class Curse(models.Model):
 
 
 class Lesson(models.Model):
-    curse = models.ForeignKey(Curse, on_delete=models.CASCADE)
+    curse = models.ForeignKey(Curse, related_name='lessons', on_delete=models.CASCADE)
     title = models.CharField('Название', max_length=70)
     dateTime = models.DateTimeField('Дата и время занятия')
+    video = models.FileField(upload_to='video/api/v1/lesson', blank=True)
 
     def __str__(self):
         return self.title
@@ -50,7 +51,7 @@ class ThemeTask(models.Model):
 
 class Task(models.Model):
     themeTask = models.ForeignKey(ThemeTask, related_name='theme', on_delete=models.CASCADE)
-    title = models.CharField('Название', max_length=70)
+    title = models.TextField('Название')
     imgTask = models.ImageField('Фото Задание', upload_to='img/api/v1/task', blank=True)
     answer = models.FloatField('Ответ')
 

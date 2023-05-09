@@ -5,6 +5,7 @@ urlpatterns = [
     path('', views.index),
     path('token', views.token),
     path('analys', views.analysAnswer),
+    path('api/statistic/<int:pk>', views.statistics),
     path('profile', views.profile, name='profile'),
     path('subj-url', views.subjectInAccount, name='subject_account')
 ]
