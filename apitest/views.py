@@ -9,7 +9,7 @@ from rest_framework.views import APIView
 from main.models import Profile, Enrollment, TaskProfile
 from .serializers import CurseSerializer, SubjectSerializer, LessonSerializer, UserSerializer, ProfileSerializer, \
     ProfileCurseSerializer, AddProfileCurse, SubjectInProfileSerializer, SectionSerializer, TaskSerializer, \
-    ThemTaskSerializer, SolveTaskSerializer, CurseLessonSerializer
+    ThemTaskSerializer, SolveTaskSerializer, CurseLessonSerializer, UserInCourseSerializer
 from subjects.models import Curse, subjects, Lesson, Section, Task, ThemeTask
 
 
@@ -75,15 +75,26 @@ class Task(generics.ListAPIView):
 
 
 class SolveTask(generics.ListAPIView):
-    lookup_field = "profile_id"
-    queryset = TaskProfile.objects.filter()
     serializer_class = SolveTaskSerializer
-    # def get(self, request, pk, **kwargs):
-    #     b = TaskProfile.objects.filter(profile_id=pk).values()
-    #     return self.retrieve(request, pk, **kwargs)
-    # #     return Response({'test': list(b)})
+
+    def get_queryset(self):
+        profile_id = self.kwargs['profile_id']
+        return TaskProfile.objects.filter(profile=profile_id)
 
 
 class AllLessonInCourse(generics.RetrieveAPIView):
     queryset = Curse.objects.all()
     serializer_class = CurseLessonSerializer
+
+
+class SomeLessonInCourse(generics.RetrieveAPIView):
+    queryset = Lesson.objects.all()
+    serializer_class = LessonSerializer
+
+
+class UserInCourse(generics.ListAPIView):
+    serializer_class = UserInCourseSerializer
+
+    def get_queryset(self):
+        curse_id = self.kwargs['course_id']
+        return Enrollment.objects.filter(curse_id=curse_id)

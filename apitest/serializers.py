@@ -25,7 +25,7 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         # fields = ('first_name', 'last_name')
-        fields = ('profile', 'last_name', 'first_name')
+        fields = ('profile', 'last_name', 'first_name', 'is_staff')
 
 
 class LessonSerializer(serializers.ModelSerializer):
@@ -91,6 +91,7 @@ class SectionSerializer(serializers.ModelSerializer):
 
 class SolveTaskSerializer(serializers.ModelSerializer):
     task = TaskSerializer()
+
     class Meta:
         model = TaskProfile
         fields = '__all__'
@@ -102,3 +103,11 @@ class CurseLessonSerializer(serializers.ModelSerializer):
     class Meta:
         model = Curse
         fields = '__all__'
+
+
+class UserInCourseSerializer(serializers.ModelSerializer):
+    profile = ProfileSerializer()
+
+    class Meta:
+        model = Enrollment
+        fields = ('profile',)

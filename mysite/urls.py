@@ -20,11 +20,13 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 from apitest.views import CurseApi, SubjectApi, LessonApi, UserApi, ProfileApi, ProfileCurseApi, AddCurseInProfile, \
-    subjectProfileApi, SectionTask, ThemeViewTask, Task, OnlyOneThemeTask, SolveTask, AllLessonInCourse
+    subjectProfileApi, SectionTask, ThemeViewTask, Task, OnlyOneThemeTask, SolveTask, AllLessonInCourse, \
+    SomeLessonInCourse, UserInCourse
 
 urlpatterns = [
                   path('api/v1/curses/', CurseApi.as_view()),
                   path('api/v1/lessonsInCourses/<int:pk>', AllLessonInCourse.as_view()),
+                  path('api/v1/someLessonsInCourses/<int:pk>', SomeLessonInCourse.as_view()),
                   path('api/v1/subject/', SubjectApi.as_view()),
                   path('api/v1/lessons/', LessonApi.as_view()),
                   path('api/v1/zapiski/', ProfileCurseApi.as_view()),
@@ -37,6 +39,7 @@ urlpatterns = [
                   path('api/v1/profile/<int:pk>/', ProfileApi.as_view()),
                   path('api/v1/subject/<int:pk>/', subjectProfileApi.as_view()),
                   path('api/v1/addcurse/', AddCurseInProfile.as_view()),
+                  path('api/v1/userInCourse/<int:course_id>', UserInCourse.as_view()),
                   path('admin/', admin.site.urls),
                   path('', include('main.urls')),
                   path('api/v1/drf-auth', include('rest_framework.urls')),
