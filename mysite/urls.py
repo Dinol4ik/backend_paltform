@@ -21,7 +21,7 @@ from django.conf.urls.static import static
 
 from apitest.views import CurseApi, SubjectApi, LessonApi, UserApi, ProfileApi, ProfileCurseApi, AddCurseInProfile, \
     subjectProfileApi, SectionTask, ThemeViewTask, Task, OnlyOneThemeTask, SolveTask, AllLessonInCourse, \
-    SomeLessonInCourse, UserInCourse
+    SomeLessonInCourse, UserInCourse, CreateHomeWork
 
 urlpatterns = [
                   path('api/v1/curses/', CurseApi.as_view()),
@@ -34,6 +34,7 @@ urlpatterns = [
                   path('api/v1/themeTask/', ThemeViewTask.as_view()),
                   path('api/v1/solveTaskInProfile/<int:profile_id>', SolveTask.as_view()),
                   path('api/v1/themeTask/<int:pk>', OnlyOneThemeTask.as_view()),
+                  path('api/v1/UpdateHomeWork/<int:pk>', CreateHomeWork.as_view()),
                   path('api/v1/task/', Task.as_view()),
                   path('api/v1/users/<int:pk>/', UserApi.as_view()),
                   path('api/v1/profile/<int:pk>/', ProfileApi.as_view()),

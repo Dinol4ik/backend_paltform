@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SqlDialectMappings">
+    <file url="file://$USER_HOME$/Desktop/bd/auth_group.sql" dialect="PostgreSQL" />
+    <file url="file://$USER_HOME$/Desktop/bd/auth_group_permissions.sql" dialect="PostgreSQL" />
+    <file url="file://$USER_HOME$/Desktop/bd/auth_permission.sql" dialect="PostgreSQL" />
+    <file url="file://$USER_HOME$/Desktop/bd/auth_user.sql" dialect="PostgreSQL" />
+    <file url="file://$USER_HOME$/Desktop/bd/auth_user_groups.sql" dialect="PostgreSQL" />
+    <file url="file://$USER_HOME$/Desktop/bd/auth_user_user_permissions.sql" dialect="PostgreSQL" />
+    <file url="file://$USER_HOME$/Desktop/bd/authtoken_token.sql" dialect="PostgreSQL" />
+    <file url="file://$USER_HOME$/Desktop/bd/django_admin_log.sql" dialect="PostgreSQL" />
+    <file url="file://$USER_HOME$/Desktop/bd/django_content_type.sql" dialect="PostgreSQL" />
+    <file url="file://$USER_HOME$/Desktop/bd/django_migrations.sql" dialect="PostgreSQL" />
+    <file url="file://$USER_HOME$/Desktop/bd/django_session.sql" dialect="PostgreSQL" />
+    <file url="file://$USER_HOME$/Desktop/bd/main_enrollment.sql" dialect="PostgreSQL" />
+    <file url="file://$USER_HOME$/Desktop/bd/main_profile.sql" dialect="PostgreSQL" />
+    <file url="file://$USER_HOME$/Desktop/bd/main_taskprofile.sql" dialect="PostgreSQL" />
+    <file url="file://$USER_HOME$/Desktop/bd/oauth2_provider_accesstoken.sql" dialect="PostgreSQL" />
+    <file url="file://$USER_HOME$/Desktop/bd/oauth2_provider_application.sql" dialect="PostgreSQL" />
+    <file url="file://$USER_HOME$/Desktop/bd/oauth2_provider_grant.sql" dialect="PostgreSQL" />
+    <file url="file://$USER_HOME$/Desktop/bd/oauth2_provider_idtoken.sql" dialect="PostgreSQL" />
+    <file url="file://$USER_HOME$/Desktop/bd/oauth2_provider_refreshtoken.sql" dialect="PostgreSQL" />
+    <file url="file://$USER_HOME$/Desktop/bd/social_auth_association.sql" dialect="PostgreSQL" />
+    <file url="file://$USER_HOME$/Desktop/bd/social_auth_code.sql" dialect="PostgreSQL" />
+    <file url="file://$USER_HOME$/Desktop/bd/social_auth_nonce.sql" dialect="PostgreSQL" />
+    <file url="file://$USER_HOME$/Desktop/bd/social_auth_partial.sql" dialect="PostgreSQL" />
+    <file url="file://$USER_HOME$/Desktop/bd/social_auth_usersocialauth.sql" dialect="PostgreSQL" />
+    <file url="file://$USER_HOME$/Desktop/bd/sqlite_master.sql" dialect="PostgreSQL" />
+    <file url="file://$USER_HOME$/Desktop/bd/sqlite_sequence.sql" dialect="PostgreSQL" />
+    <file url="file://$USER_HOME$/Desktop/bd/subjects_curse.sql" dialect="PostgreSQL" />
+    <file url="file://$USER_HOME$/Desktop/bd/subjects_lesson.sql" dialect="PostgreSQL" />
+    <file url="file://$USER_HOME$/Desktop/bd/subjects_section.sql" dialect="PostgreSQL" />
+    <file url="file://$USER_HOME$/Desktop/bd/subjects_subjects.sql" dialect="PostgreSQL" />
+    <file url="file://$USER_HOME$/Desktop/bd/subjects_task.sql" dialect="PostgreSQL" />
+    <file url="file://$USER_HOME$/Desktop/bd/subjects_themetask.sql" dialect="PostgreSQL" />
+  </component>
+</project>

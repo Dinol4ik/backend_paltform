@@ -1,3 +1,4 @@
+from django.contrib.postgres.fields import ArrayField
 from django.db import models
 
 
@@ -27,8 +28,9 @@ class Curse(models.Model):
 class Lesson(models.Model):
     curse = models.ForeignKey(Curse, related_name='lessons', on_delete=models.CASCADE)
     title = models.CharField('Название', max_length=70)
-    dateTime = models.DateTimeField('Дата и время занятия')
+    date_time = models.DateTimeField('Дата и время занятия')
     video = models.FileField(upload_to='video/api/v1/lesson', blank=True)
+    home_task = ArrayField(models.CharField(max_length=100), blank=True)
 
     def __str__(self):
         return self.title
@@ -50,9 +52,9 @@ class ThemeTask(models.Model):
 
 
 class Task(models.Model):
-    themeTask = models.ForeignKey(ThemeTask, related_name='theme', on_delete=models.CASCADE)
+    theme_task = models.ForeignKey(ThemeTask, related_name='theme', on_delete=models.CASCADE)
     title = models.TextField('Название')
-    imgTask = models.ImageField('Фото Задание', upload_to='img/api/v1/task', blank=True)
+    img_task = models.ImageField('Фото Задание', upload_to='img/api/v1/task', blank=True)
     answer = models.FloatField('Ответ')
 
     def __str__(self):

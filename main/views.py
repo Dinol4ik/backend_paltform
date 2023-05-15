@@ -39,7 +39,7 @@ def token(request):
     json_token = json.loads(test.text)["access_token"]
     data = requests.post('http://127.0.0.1:8000/auth/convert-token', data={
         "grant_type": "convert_token",
-        "client_id": "sE36wkEE0pvSxIpobxF96riPvuM54jHsopcrG4pj",
+        "client_id": "CQOKf5pTzQNcKIXACwv95vAiH4V3HFEY9u95vrLb",
         "token": "" + json_token,
         "backend": "vk-oauth2"})
     json_token_bd = json.loads((data.text))['access_token']

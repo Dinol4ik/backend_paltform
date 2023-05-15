@@ -9,7 +9,8 @@ from rest_framework.views import APIView
 from main.models import Profile, Enrollment, TaskProfile
 from .serializers import CurseSerializer, SubjectSerializer, LessonSerializer, UserSerializer, ProfileSerializer, \
     ProfileCurseSerializer, AddProfileCurse, SubjectInProfileSerializer, SectionSerializer, TaskSerializer, \
-    ThemTaskSerializer, SolveTaskSerializer, CurseLessonSerializer, UserInCourseSerializer
+    ThemTaskSerializer, SolveTaskSerializer, CurseLessonSerializer, UserInCourseSerializer, \
+    CreateHomeWorkForCourseSerializer
 from subjects.models import Curse, subjects, Lesson, Section, Task, ThemeTask
 
 
@@ -44,7 +45,7 @@ class UserApi(generics.RetrieveAPIView):
     serializer_class = UserSerializer
 
 
-class LessonApi(generics.ListAPIView):
+class LessonApi(generics.ListCreateAPIView):
     queryset = Lesson.objects.all()
     serializer_class = LessonSerializer
 
@@ -87,7 +88,7 @@ class AllLessonInCourse(generics.RetrieveAPIView):
     serializer_class = CurseLessonSerializer
 
 
-class SomeLessonInCourse(generics.RetrieveAPIView):
+class SomeLessonInCourse(generics.RetrieveUpdateAPIView):
     queryset = Lesson.objects.all()
     serializer_class = LessonSerializer
 
@@ -98,3 +99,8 @@ class UserInCourse(generics.ListAPIView):
     def get_queryset(self):
         curse_id = self.kwargs['course_id']
         return Enrollment.objects.filter(curse_id=curse_id)
+
+
+class CreateHomeWork(generics.UpdateAPIView):
+    queryset = Lesson.objects.all()
+    serializer_class = CreateHomeWorkForCourseSerializer

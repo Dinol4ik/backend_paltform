@@ -44,8 +44,17 @@ class ProfileCurseSerializer(serializers.ModelSerializer):
         fields = ('curse_id', 'profile_id', 'curse', 'date')
 
 
+class CurseSerializerWithLesson(serializers.ModelSerializer):
+    subject = SubjectSerializer(read_only=True)
+    lessons = LessonSerializer(many=True)
+
+    class Meta:
+        model = Curse
+        fields = '__all__'
+
+
 class ProfileSerializer(serializers.ModelSerializer):
-    curses = CurseSerializer(many=True)
+    curses = CurseSerializerWithLesson(many=True)
 
     # curses = serializers.StringRelatedField(many=True)
     class Meta:
@@ -70,7 +79,7 @@ class SubjectInProfileSerializer(serializers.ModelSerializer):
 class TaskSerializer(serializers.ModelSerializer):
     class Meta:
         model = Task
-        fields = ("id", "title", "imgTask")
+        fields = ("id", "title", "img_task")
 
 
 class ThemTaskSerializer(serializers.ModelSerializer):
@@ -111,3 +120,9 @@ class UserInCourseSerializer(serializers.ModelSerializer):
     class Meta:
         model = Enrollment
         fields = ('profile',)
+
+
+class CreateHomeWorkForCourseSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Lesson
+        fields = '__all__'
