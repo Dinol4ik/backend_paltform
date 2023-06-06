@@ -19,7 +19,16 @@ django.utils.encoding.force_text = force_str
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/1.9/howto/static-files/
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_URL = 'static/'
+
+# Extra places for collectstatic to find static files.
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.mysite.com/en/4.1/howto/deployment/checklist/
@@ -30,12 +39,13 @@ SECRET_KEY = 'django-insecure-uhvkjbty$&z2v^j5)g96dg-%bq0yy_9!snp46b*=ge32c&hpc+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['df1inbc2.beget.tech', '127.0.0.1', 'localhost:8000']
+ALLOWED_HOSTS = ['*']
+CORS_ALLOW_ALL_ORIGINS = True
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
 # Application definition
-CSRF_TRUSTED_ORIGINS = ['https://*.mydomain.com','https://*.127.0.0.1']
+CSRF_TRUSTED_ORIGINS = ['https://*.mydomain.com', 'https://*.127.0.0.1', 'http://127.0.0.1']
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -68,11 +78,11 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-CORS_ORIGIN_ALLOW_ALL = True
+
 CORS_ALLOWED_ORIGINS = [
-    "https://example.com",
     "http://127.0.0.1:8000",
-    "http://127.0.0.1:3000"
+    "http://127.0.0.1:3000",
+    "http://localhost:8000",
 ]
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_HEADERS = default_headers + (
@@ -82,7 +92,9 @@ CORS_ALLOW_HEADERS = default_headers + (
 )
 CORS_ORIGIN_WHITELIST = (
     'http://localhost:3000',
+    "http://localhost:8000",
     'http://127.0.0.1:3000',
+    'http://127.0.0.1:8000',
 )
 
 REST_FRAMEWORK = {
@@ -103,7 +115,7 @@ ROOT_URLCONF = 'mysite.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates']
+        'DIRS': []
         ,
         'APP_DIRS': True,
         'OPTIONS': {
@@ -172,10 +184,6 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.mysite.com/en/4.1/howto/static-files/
 
-STATIC_URL = 'static/'
-STATICFILES_DIRS = [
-    BASE_DIR / "static",
-]
 MEDIA_URL = '/media/'
 
 # Путь хранения картинок

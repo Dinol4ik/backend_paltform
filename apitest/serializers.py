@@ -79,7 +79,7 @@ class SubjectInProfileSerializer(serializers.ModelSerializer):
 class TaskSerializer(serializers.ModelSerializer):
     class Meta:
         model = Task
-        fields = ("id", "title", "img_task")
+        fields = ("id", "title", "img_task", "theme_task_id")
 
 
 class ThemTaskSerializer(serializers.ModelSerializer):
@@ -120,6 +120,15 @@ class UserInCourseSerializer(serializers.ModelSerializer):
     class Meta:
         model = Enrollment
         fields = ('profile',)
+
+
+class PopularCourseSerializer(serializers.ModelSerializer):
+    course_count = serializers.IntegerField()
+
+
+    class Meta:
+        model = Enrollment
+        fields = ('curse_id', 'course_count')
 
 
 class CreateHomeWorkForCourseSerializer(serializers.ModelSerializer):

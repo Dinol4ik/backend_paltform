@@ -1,8 +1,10 @@
 import requests
 from django.contrib.auth.models import User
+from django.db.models import *
+from django.db import connection
 from django.shortcuts import render
 from rest_framework import generics, viewsets
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
@@ -10,7 +12,7 @@ from main.models import Profile, Enrollment, TaskProfile
 from .serializers import CurseSerializer, SubjectSerializer, LessonSerializer, UserSerializer, ProfileSerializer, \
     ProfileCurseSerializer, AddProfileCurse, SubjectInProfileSerializer, SectionSerializer, TaskSerializer, \
     ThemTaskSerializer, SolveTaskSerializer, CurseLessonSerializer, UserInCourseSerializer, \
-    CreateHomeWorkForCourseSerializer
+    CreateHomeWorkForCourseSerializer, PopularCourseSerializer
 from subjects.models import Curse, subjects, Lesson, Section, Task, ThemeTask
 
 
@@ -20,7 +22,12 @@ class CurseApi(generics.ListAPIView):
     # permission_classes = (IsAuthenticated,) ##- ограничения на получение данных
 
 
-class SubjectApi(generics.ListAPIView):
+class TouchCourse(generics.RetrieveAPIView):
+    queryset = Curse.objects.all()
+    serializer_class = CurseSerializer
+
+
+class SubjectApi(generics.ListCreateAPIView):
     queryset = subjects.objects.all()
     serializer_class = SubjectSerializer
 
@@ -99,6 +106,14 @@ class UserInCourse(generics.ListAPIView):
     def get_queryset(self):
         curse_id = self.kwargs['course_id']
         return Enrollment.objects.filter(curse_id=curse_id)
+
+
+class PopularCourse(generics.ListAPIView):
+    serializer_class = PopularCourseSerializer
+
+    def get_queryset(self):
+        return Enrollment.objects.values('curse_id').annotate(course_count=Count('curse_id')).order_by(
+            '-course_count')
 
 
 class CreateHomeWork(generics.UpdateAPIView):
