@@ -125,7 +125,6 @@ class UserInCourseSerializer(serializers.ModelSerializer):
 class PopularCourseSerializer(serializers.ModelSerializer):
     course_count = serializers.IntegerField()
 
-
     class Meta:
         model = Enrollment
         fields = ('curse_id', 'course_count')
@@ -135,3 +134,10 @@ class CreateHomeWorkForCourseSerializer(serializers.ModelSerializer):
     class Meta:
         model = Lesson
         fields = '__all__'
+
+
+class LessonIdSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Lesson
+        fields = ('id',)

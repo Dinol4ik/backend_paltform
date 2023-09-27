@@ -12,7 +12,7 @@ from main.models import Profile, Enrollment, TaskProfile
 from .serializers import CurseSerializer, SubjectSerializer, LessonSerializer, UserSerializer, ProfileSerializer, \
     ProfileCurseSerializer, AddProfileCurse, SubjectInProfileSerializer, SectionSerializer, TaskSerializer, \
     ThemTaskSerializer, SolveTaskSerializer, CurseLessonSerializer, UserInCourseSerializer, \
-    CreateHomeWorkForCourseSerializer, PopularCourseSerializer
+    CreateHomeWorkForCourseSerializer, PopularCourseSerializer, LessonIdSerializer
 from subjects.models import Curse, subjects, Lesson, Section, Task, ThemeTask
 
 
@@ -119,3 +119,8 @@ class PopularCourse(generics.ListAPIView):
 class CreateHomeWork(generics.UpdateAPIView):
     queryset = Lesson.objects.all()
     serializer_class = CreateHomeWorkForCourseSerializer
+
+
+class LessonsId(generics.ListAPIView):
+    queryset = Lesson.objects.exclude(stream_status="offline")
+    serializer_class = LessonIdSerializer

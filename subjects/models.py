@@ -31,6 +31,7 @@ class Lesson(models.Model):
     date_time = models.DateTimeField('Дата и время занятия')
     video = models.FileField(upload_to='video/api/v1/lesson', blank=True)
     home_task = ArrayField(models.CharField(max_length=100), blank=True)
+    stream_status = models.CharField('Статус трансляции', max_length=50, default='offline')
 
     def __str__(self):
         return self.title

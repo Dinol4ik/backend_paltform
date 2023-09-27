@@ -8,5 +8,12 @@
       <jdbc-url>jdbc:postgresql://localhost:5432/educationalDB</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
+    <data-source source="LOCAL" name="educationalDB@64.226.89.126" uuid="163956e2-a9d5-4478-bb04-bb4b595140fd">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://64.226.89.126:5432/educationalDB</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
   </component>
 </project>

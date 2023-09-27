@@ -22,6 +22,7 @@ from pathlib import Path
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = 'static/'
 
@@ -37,15 +38,16 @@ STATICFILES_DIRS = (
 SECRET_KEY = 'django-insecure-uhvkjbty$&z2v^j5)g96dg-%bq0yy_9!snp46b*=ge32c&hpc+'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 CORS_ALLOW_ALL_ORIGINS = True
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
-
+# WAYFerUEBULATe1C - paww
+# 64.226.89.126
 # Application definition
-CSRF_TRUSTED_ORIGINS = ['https://*.mydomain.com', 'https://*.127.0.0.1', 'http://127.0.0.1']
+CSRF_TRUSTED_ORIGINS = ['https://*.localhost', 'https://*.localhost', 'http://localhost']
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -70,6 +72,7 @@ MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
     'django.middleware.security.SecurityMiddleware',
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -80,8 +83,7 @@ MIDDLEWARE = [
 
 
 CORS_ALLOWED_ORIGINS = [
-    "http://127.0.0.1:8000",
-    "http://127.0.0.1:3000",
+    "http://localhost:3000",
     "http://localhost:8000",
 ]
 CORS_ALLOW_CREDENTIALS = True
@@ -93,8 +95,6 @@ CORS_ALLOW_HEADERS = default_headers + (
 CORS_ORIGIN_WHITELIST = (
     'http://localhost:3000',
     "http://localhost:8000",
-    'http://127.0.0.1:3000',
-    'http://127.0.0.1:8000',
 )
 
 REST_FRAMEWORK = {
@@ -184,11 +184,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.mysite.com/en/4.1/howto/static-files/
 
-MEDIA_URL = '/media/'
+MEDIA_URL = '/static/media/'
 
 # Путь хранения картинок
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
-
+MEDIA_ROOT = os.path.join(BASE_DIR, 'staticfiles/media/')
 # Default primary key field type
 # https://docs.mysite.com/en/4.1/ref/settings/#default-auto-field
 

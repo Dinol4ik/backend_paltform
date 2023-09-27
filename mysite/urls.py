@@ -21,7 +21,7 @@ from django.conf.urls.static import static
 
 from apitest.views import CurseApi, SubjectApi, LessonApi, UserApi, ProfileApi, ProfileCurseApi, AddCurseInProfile, \
     subjectProfileApi, SectionTask, ThemeViewTask, Task, OnlyOneThemeTask, SolveTask, AllLessonInCourse, \
-    SomeLessonInCourse, UserInCourse, CreateHomeWork, PopularCourse, TouchCourse
+    SomeLessonInCourse, UserInCourse, CreateHomeWork, PopularCourse, TouchCourse, LessonsId
 
 urlpatterns = [
                   path('api/v1/curses/', CurseApi.as_view()),
@@ -42,6 +42,7 @@ urlpatterns = [
                   path('api/v1/profile/<int:pk>/', ProfileApi.as_view()),
                   path('api/v1/subject/<int:pk>/', subjectProfileApi.as_view()),
                   path('api/v1/addcurse/', AddCurseInProfile.as_view()),
+                    path('api/v1/getFutureLessons', LessonsId.as_view()),
                   # path('api/v1/popularCourse', PopularCourse.as_view()),
                   path('api/v1/userInCourse/<int:course_id>', UserInCourse.as_view()),
                   path('admin/', admin.site.urls),
@@ -50,7 +51,6 @@ urlpatterns = [
                   re_path(r'^auth/', include('djoser.urls')),  # auth в вконтакте - джосер
                   re_path(r'^auth/', include('djoser.urls.authtoken')),
                   re_path(r'^auth/', include('rest_framework_social_oauth2.urls')),
-                  path('subject/', include('subjects.urls'))
               ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL,
