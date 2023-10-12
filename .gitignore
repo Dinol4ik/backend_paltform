@@ -4,7 +4,7 @@ __pycache__
 media
 
 # Sensitive or high-churn files
-.idea/**/dataSources/
+.idea/*
 
 # IntelliJ
 out/
